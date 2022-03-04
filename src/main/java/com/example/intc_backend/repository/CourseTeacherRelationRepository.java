@@ -11,4 +11,6 @@ public interface CourseTeacherRelationRepository extends JpaRepository<CourseTea
 
     List<CourseTeacherRelation> findByCourseId(Long courseId);
 
+    CourseTeacherRelation findByCourseIdAndTeacherId(Long courseId,Long teacherId);
+
 }

@@ -86,8 +86,10 @@ CREATE TABLE IF NOT EXISTS vacancy
     position        VARCHAR(200) NOT NULL,
     salary          BIGSERIAL    NOT NULL,
     experience_age  BIGSERIAL    NOT NULL,
-    graphic         VARCHAR(200) NOT NULL,
+    graphic_work    VARCHAR(200) NOT NULL,
+    type_busy       VARCHAR(200) NOT NULL,
     company_address VARCHAR(200) NOT NULL,
+    link            TEXT,
     description     TEXT         NOT NULL
 );
 
@@ -139,7 +141,7 @@ CREATE TABLE IF NOT EXISTS student_group_relation
     FOREIGN KEY (group_id) REFERENCES group_ (id)
 );
 
-CREATE TABLE IF NOT EXISTS teacher_group_relation
+CREATE TABLE IF NOT EXISTS curator_group_relation
 (
     id         BIGSERIAL NOT NULL PRIMARY KEY,
     teacher_id BIGSERIAL NOT NULL,
@@ -148,5 +150,14 @@ CREATE TABLE IF NOT EXISTS teacher_group_relation
     FOREIGN KEY (group_id) REFERENCES group_ (id)
 );
 
+CREATE TABLE IF NOT EXISTS group_course_teacher_relation
+(
+    group_id   BIGSERIAL NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES group_ (id),
+    teacher_id BIGSERIAL NOT NULL,
+    FOREIGN KEY (teacher_id) REFERENCES person(id),
+    course_id BIGSERIAL NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES course(id)
+);
 -- DROP TABLE group_list
 -- CREATE SEQUENCE clients_id_seq START WITH 3 INCREMENT 1;

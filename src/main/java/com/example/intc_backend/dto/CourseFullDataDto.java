@@ -3,31 +3,22 @@ package com.example.intc_backend.dto;
 import java.util.List;
 
 public class CourseFullDataDto {
-    private Long courseId;
-    private String courseName;
-    private List<Long> courseTeacherIdList;
+    private CourseDto course;
+    private List<Long> courseTeacherList;
 
-    public Long getCourseId() {
-        return courseId;
+    public CourseDto getCourse() {
+        return course;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setCourse(CourseDto course) {
+        this.course = course;
     }
 
-    public String getCourseName() {
-        return courseName;
+    public void setCourseTeacherList(List<Long> courseTeacherList) {
+        this.courseTeacherList = courseTeacherList;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
-
-    public List<Long> getCourseTeacherIdList() {
-        return courseTeacherIdList;
-    }
-
-    public void setCourseTeacherRelationDtoList(List<Long> courseTeacherList) {
-        this.courseTeacherIdList = courseTeacherList;
+    public List<Long> getCourseTeacherList() {
+        return courseTeacherList;
     }
 }

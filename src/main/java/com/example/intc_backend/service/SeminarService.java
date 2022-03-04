@@ -10,8 +10,13 @@ public interface SeminarService {
     void save(SeminarSaveRequestDto seminarSaveRequestDto);
 
     SeminarDto findById(Long id);
+
     List<SeminarDto> findAll();
+
     void updateSeminar(SeminarDto seminarDto);
+
     List<SeminarDto> findByGroupId(Long groupId);
+
+    void saveArray(SeminarSaveRequestDto[] seminarSaveRequestDto);
 
 }

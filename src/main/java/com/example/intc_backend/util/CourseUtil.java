@@ -28,10 +28,11 @@ public class CourseUtil {
 
         return courseDto;
     }
+
     public static List<CourseDto> toCourseDtoList(List<Course> courseList) {
         List<CourseDto> courseDtoList = new ArrayList<>();
 
-        for (Course course:courseList){
+        for (Course course : courseList) {
             courseDtoList.add(toCourseDto(course));
         }
 

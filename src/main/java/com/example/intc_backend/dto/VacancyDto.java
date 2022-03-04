@@ -5,10 +5,37 @@ public class VacancyDto {
     private String companyName;
     private String position;
     private Long salary;
-    private String graphic;
+    private String graphicWork;
+    private String typeBusy;
     private String description;
+    private String link;
     private String companyAddress;
     private Long experienceAge;
+
+    public String getGraphicWork() {
+        return graphicWork;
+    }
+
+    public void setGraphicWork(String graphicWork) {
+        this.graphicWork = graphicWork;
+    }
+
+    public String getTypeBusy() {
+        return typeBusy;
+    }
+
+    public void setTypeBusy(String typeBusy) {
+        this.typeBusy = typeBusy;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
 
     public String getCompanyAddress() {
         return companyAddress;
@@ -24,14 +51,6 @@ public class VacancyDto {
 
     public void setExperienceAge(Long experienceAge) {
         this.experienceAge = experienceAge;
-    }
-
-    public String getGraphic() {
-        return graphic;
-    }
-
-    public void setGraphic(String graphic) {
-        this.graphic = graphic;
     }
 
     public Long getId() {

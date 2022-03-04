@@ -1,13 +1,16 @@
 package com.example.intc_backend.service;
 
+import com.example.intc_backend.dto.GroupDto;
 import com.example.intc_backend.dto.TeacherGroupRelationDto;
 import com.example.intc_backend.dto.TeacherGroupRelationSaveRequestDto;
+import com.example.intc_backend.model.Group;
 import com.example.intc_backend.model.TeacherGroupRelation;
 import com.example.intc_backend.repository.TeacherGroupRelationRepository;
 import com.example.intc_backend.util.TeacherGroupRelationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -32,14 +35,8 @@ public class TeacherGroupRelationServiceIml implements TeacherGroupRelationServi
 
     @Override
     public Boolean find(Long teacherId) {
-//        System.out.println(teacherId);
         TeacherGroupRelationDto teacherGroupRelationDto = new TeacherGroupRelationDto();
-//        try {
-//            teacherGroupRelationDto =
-//                TeacherGroupRelationUtil.toTeacherGroupRelationDto(teacherGroupRelationRepository.findByTeacherId(teacherId));
-//        }catch (Exception error){
-//
-//        }
+
         boolean check = teacherGroupRelationRepository.existsById(teacherId);
 //        System.out.println("boolean"+check);
         return check;

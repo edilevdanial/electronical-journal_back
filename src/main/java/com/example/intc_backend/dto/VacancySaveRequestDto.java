@@ -4,10 +4,36 @@ public class VacancySaveRequestDto {
     private String companyName;
     private String position;
     private Long salary;
+    private String typeBusy;
+    private String graphicWork;
     private String description;
-    private String graphic;
     private String companyAddress;
     private Long experienceAge;
+    private String link;
+
+    public String getGraphicWork() {
+        return graphicWork;
+    }
+
+    public void setGraphicWork(String graphicWork) {
+        this.graphicWork = graphicWork;
+    }
+
+    public String getTypeBusy() {
+        return typeBusy;
+    }
+
+    public void setTypeBusy(String typeBusy) {
+        this.typeBusy = typeBusy;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public String getCompanyAddress() {
         return companyAddress;
@@ -23,14 +49,6 @@ public class VacancySaveRequestDto {
 
     public void setExperienceAge(Long experienceAge) {
         this.experienceAge = experienceAge;
-    }
-
-    public String getGraphic() {
-        return graphic;
-    }
-
-    public void setGraphic(String graphic) {
-        this.graphic = graphic;
     }
 
     public String getCompanyName() {

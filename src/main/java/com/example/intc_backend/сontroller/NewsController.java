@@ -22,14 +22,7 @@ public class NewsController {
     }
 
     @PostMapping(value = "create-news")
-    public ResponseEntity<?> createNews(@RequestParam(name = "preview")String preview,@RequestParam(name = "name")String name,@RequestParam(name = "description")String description){
-        System.out.println("YESSS");
-        NewsSaveRequestDto newsSaveRequestDto = new NewsSaveRequestDto();
-
-        newsSaveRequestDto.setName(name);
-        newsSaveRequestDto.setPreview(preview);
-        newsSaveRequestDto.setDescription(description);
-
+    public ResponseEntity<?> createNews(@RequestBody NewsSaveRequestDto newsSaveRequestDto){
         newsService.save(newsSaveRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

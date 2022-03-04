@@ -1,45 +1,44 @@
 package com.example.intc_backend.service;
 
-import com.example.intc_backend.model.User;
-import com.example.intc_backend.repository.UserRepository;
 import com.example.intc_backend.dto.UserDto;
 import com.example.intc_backend.dto.UserSaveRequestDto;
+import com.example.intc_backend.model.User;
+import com.example.intc_backend.repository.UserRepository;
 import com.example.intc_backend.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class UserServiceIml implements UserService {
 
     @Autowired
-    private UserRepository clientRepository;
+    private UserRepository userRepository;
 
     @Override
-    public  List<UserDto> findUserByType(String type) {
+    public List<UserDto> findUserByType(String type) {
         System.out.println(type);
-         List<UserDto> findUser = UserUtil.toListUserDto(clientRepository.findUserByType(type));
-        System.out.println(Arrays.asList(findUser)+"HELLO");
-         return findUser;
+        List<UserDto> findUser = UserUtil.toListUserDto(userRepository.findUserByType(type));
+        System.out.println(Arrays.asList(findUser) + "HELLO");
+        return findUser;
     }
 
     @Override
     public void save(UserSaveRequestDto userSaveRequestDto) {
         User user = UserUtil.toUser(userSaveRequestDto);
-        clientRepository.save(user);
+        userRepository.save(user);
 //        clientRepository.save(user);
     }
 
     @Override
     public List<UserDto> findAll() {
-        return UserUtil.toListUserDto(clientRepository.findAll());
+        return UserUtil.toListUserDto(userRepository.findAll());
     }
 
-    public List<UserDto> getAllStudent(String type){
-        List<User> allUser = clientRepository.findAll();
+    public List<UserDto> getAllStudent(String type) {
+        List<User> allUser = userRepository.findAll();
 //        for (int i=0;i<allUser.size();i++){
 //            if (!allUser.get(i).getType().contains("STUDENT")){
 //                allUser.remove(i);
@@ -58,7 +57,7 @@ public class UserServiceIml implements UserService {
 
     @Override
     public UserDto find(Long id) {
-        User user = clientRepository.getById(id);
+        User user = userRepository.getById(id);
         return UserUtil.toUserDto(user);
     }
 
@@ -69,10 +68,10 @@ public class UserServiceIml implements UserService {
 
     @Override
     public boolean updatePhoneNumber(Long userId, String phone_number) {
-        User user = clientRepository.getById(userId);
-        if(clientRepository.existsById(userId)){
+        User user = userRepository.getById(userId);
+        if (userRepository.existsById(userId)) {
             user.setPhoneNumber(phone_number);
-            clientRepository.save(user);
+            userRepository.save(user);
             return true;
         }
         return false;
@@ -80,8 +79,8 @@ public class UserServiceIml implements UserService {
 
     @Override
     public boolean delete(Long id) {
-        if (clientRepository.existsById(id)){
-            clientRepository.getById(id).setActive(false);
+        if (userRepository.existsById(id)) {
+            userRepository.getById(id).setActive(false);
             return true;
         }
         return false;

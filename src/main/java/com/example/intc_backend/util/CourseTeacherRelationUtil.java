@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseTeacherRelationUtil {
-    public static CourseTeacherRelation toCourseRelation(CourseTeacherRelationSaveDto courseTeacherRelationSaveDto){
+    public static CourseTeacherRelation toCourseRelation(CourseTeacherRelationSaveDto courseTeacherRelationSaveDto) {
         CourseTeacherRelation courseTeacherRelation = new CourseTeacherRelation();
 
         courseTeacherRelation.setTeacherId(courseTeacherRelationSaveDto.getTeacherId());
@@ -19,7 +19,17 @@ public class CourseTeacherRelationUtil {
 
         return courseTeacherRelation;
     }
-    public static CourseTeacherRelationDto toCourseRelationDto(CourseTeacherRelation courseTeacherRelation){
+
+    public static CourseTeacherRelation toCourseRelation(CourseTeacherRelationDto courseTeacherRelationDto) {
+        CourseTeacherRelation courseTeacherRelation = new CourseTeacherRelation();
+
+        courseTeacherRelation.setTeacherId(courseTeacherRelationDto.getTeacherId());
+        courseTeacherRelation.setCourseId(courseTeacherRelationDto.getCourseId());
+
+        return courseTeacherRelation;
+    }
+
+    public static CourseTeacherRelationDto toCourseRelationDto(CourseTeacherRelation courseTeacherRelation) {
         CourseTeacherRelationDto courseTeacherRelationDto = new CourseTeacherRelationDto();
 
         courseTeacherRelationDto.setTeacherId(courseTeacherRelation.getTeacherId());
@@ -27,10 +37,11 @@ public class CourseTeacherRelationUtil {
 
         return courseTeacherRelationDto;
     }
-    public static List<CourseTeacherRelationDto> toTeacherRelationDtoList(List<CourseTeacherRelation> courseTeacherRelationList){
+
+    public static List<CourseTeacherRelationDto> toTeacherRelationDtoList(List<CourseTeacherRelation> courseTeacherRelationList) {
         List<CourseTeacherRelationDto> courseTeacherRelationDtoList = new ArrayList<>();
 
-        for (CourseTeacherRelation course:courseTeacherRelationList){
+        for (CourseTeacherRelation course : courseTeacherRelationList) {
             courseTeacherRelationDtoList.add(toCourseRelationDto(course));
         }
 

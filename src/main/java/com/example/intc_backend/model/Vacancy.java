@@ -15,14 +15,34 @@ public class Vacancy {
     private String position;
     @Column(name = "salary")
     private Long salary;
-    @Column(name = "graphic")
-    private String graphic;
+    @Column(name = "type_busy")
+    private String typeBusy;
+    @Column(name = "graphic_work")
+    private String graphicWork;
     @Column(name = "description")
     private String description;
     @Column(name = "experience_age")
     private Long experienceAge;
     @Column(name = "company_address")
     private String companyAddress;
+    @Column(name = "link")
+    private String link;
+
+    public String getGraphicWork() {
+        return graphicWork;
+    }
+
+    public void setGraphicWork(String graphicWork) {
+        this.graphicWork = graphicWork;
+    }
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 
     public Long getId() {
         return id;
@@ -72,12 +92,12 @@ public class Vacancy {
         this.salary = salary;
     }
 
-    public String getGraphic() {
-        return graphic;
+    public String getTypeBusy() {
+        return typeBusy;
     }
 
-    public void setGraphic(String graphic) {
-        this.graphic = graphic;
+    public void setTypeBusy(String typeBusy) {
+        this.typeBusy = typeBusy;
     }
 
     public String getDescription() {

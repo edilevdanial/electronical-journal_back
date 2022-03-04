@@ -8,7 +8,7 @@ import javax.persistence.Id;
 public class SeminarDto {
     private Long id;
     private Long groupId;
-    private Long courseId;
+    private CourseDto course;
     private Long teacherId;
     private String weekDay;
     private String startTime;
@@ -30,12 +30,12 @@ public class SeminarDto {
         this.groupId = groupId;
     }
 
-    public Long getCourseId() {
-        return courseId;
+    public CourseDto getCourse() {
+        return course;
     }
 
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
+    public void setCourse(CourseDto course) {
+        this.course = course;
     }
 
     public Long getTeacherId() {

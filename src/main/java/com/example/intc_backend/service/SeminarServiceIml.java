@@ -13,8 +13,11 @@ import java.util.List;
 
 @Service
 public class SeminarServiceIml implements SeminarService{
+
     @Autowired
     private SeminarRepository seminarRepository;
+    @Autowired
+    private CourseService courseService;
 
     @Override
     public void save(SeminarSaveRequestDto seminarSaveRequestDto) {
@@ -28,7 +31,7 @@ public class SeminarServiceIml implements SeminarService{
 
     @Override
     public List<SeminarDto> findAll() {
-        List<SeminarDto> seminarDtoList = SeminarUtil.toSeminarDtoList(seminarRepository.findAll());
+        List<SeminarDto> seminarDtoList = SeminarUtil.toSeminarDtoList(seminarRepository.findAll(),courseService);
         return seminarDtoList;
     }
 
@@ -39,8 +42,14 @@ public class SeminarServiceIml implements SeminarService{
 
     @Override
     public List<SeminarDto> findByGroupId(Long groupId) {
-        List<SeminarDto> seminarDtoListByGroup = SeminarUtil.toSeminarDtoList(seminarRepository.findByGroupId(groupId));
-
+        List<SeminarDto> seminarDtoListByGroup = SeminarUtil.toSeminarDtoList(seminarRepository.findByGroupId(groupId),courseService);
         return seminarDtoListByGroup;
+    }
+
+    @Override
+    public void saveArray(SeminarSaveRequestDto[] seminarSaveRequestDto) {
+        for(SeminarSaveRequestDto saveRequestDto:seminarSaveRequestDto){
+            seminarRepository.save(SeminarUtil.toSeminar(saveRequestDto));
+        }
     }
 }

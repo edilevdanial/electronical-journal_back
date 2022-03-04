@@ -21,39 +21,35 @@ public class SeminarController {
     }
 
     @PostMapping(value = "create-seminar")
-    public ResponseEntity<?> createSeminar(@RequestBody SeminarSaveRequestDto seminarSaveRequestDto){
-        System.out.println(seminarSaveRequestDto.getCourseId());
-        System.out.println(seminarSaveRequestDto.getGroupId());
-        System.out.println(seminarSaveRequestDto.getTeacherId());
-        System.out.println(seminarSaveRequestDto.getWeekDay());
-        System.out.println(seminarSaveRequestDto.getStartTime());
-        System.out.println(seminarSaveRequestDto.getEndTime());
-        seminarService.save(seminarSaveRequestDto);
+    public ResponseEntity<?> createSeminar(@RequestBody SeminarSaveRequestDto[] seminarSaveRequestDto) {
+        seminarService.saveArray(seminarSaveRequestDto);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @PostMapping(value = "update-seminar")
-    public ResponseEntity<?> updateSeminar(@RequestBody SeminarDto seminarDto){
+//
+//    @PostMapping(value = "create-seminar")
+//    public ResponseEntity<?> createSeminar(@RequestBody SeminarSaveRequestDto[] seminarSaveRequestDto) {
+//        seminarService.saveArray(seminarSaveRequestDto);
+//
+//        return new ResponseEntity<>(HttpStatus.CREATED);
+//    }
 
-        System.out.println(seminarDto.getId());
-        System.out.println(seminarDto.getCourseId());
-        System.out.println(seminarDto.getGroupId());
-        System.out.println(seminarDto.getTeacherId());
-        System.out.println(seminarDto.getWeekDay());
-        System.out.println(seminarDto.getStartTime());
-        System.out.println(seminarDto.getEndTime());
+    @PostMapping(value = "update-seminar")
+    public ResponseEntity<?> updateSeminar(@RequestBody SeminarDto seminarDto) {
         seminarService.updateSeminar(seminarDto);
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
     @GetMapping(value = "all/seminar")
-    public ResponseEntity<List<SeminarDto>> allSeminar(){
+    public ResponseEntity<List<SeminarDto>> allSeminar() {
         List<SeminarDto> seminarDtoList = seminarService.findAll();
 
         return ResponseEntity.ok(seminarDtoList);
     }
+
     @GetMapping(value = "seminar/group")
-    public ResponseEntity<List<SeminarDto>> allSeminarByGroupId(@RequestParam(name = "groupId")Long groupId){
+    public ResponseEntity<List<SeminarDto>> allSeminarByGroupId(@RequestParam(name = "groupId") Long groupId) {
         List<SeminarDto> seminarDtoListByGroup = seminarService.findByGroupId(groupId);
 
         return ResponseEntity.ok(seminarDtoListByGroup);

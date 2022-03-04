@@ -40,7 +40,7 @@ public class VacancyController {
     }
 
     @PostMapping(value = "/vacancy/{id}")
-    public ResponseEntity<VacancyDto> updateVacancyById(@PathVariable(name = "id") Long id, @RequestParam(name = "companyName") String companyName, @RequestParam(name = "companyAddress") String companyAddress, @RequestParam(name = "experienceAge") Long experienceAge, @RequestParam(name = "position") String position, @RequestParam(name = "salary") Long salary, @RequestParam(name = "graphic") String graphic, @RequestParam(name = "description") String description) {
+    public ResponseEntity<VacancyDto> updateVacancyById(@PathVariable(name = "id") Long id, @RequestParam(name = "companyName") String companyName, @RequestParam(name = "companyAddress") String companyAddress, @RequestParam(name = "experienceAge") Long experienceAge, @RequestParam(name = "position") String position, @RequestParam(name = "typeBusy") String typeBusy, @RequestParam(name = "salary") Long salary, @RequestParam(name = "graphic") String graphic, @RequestParam(name = "description") String description) {
         VacancyDto vacancyDto = vacancyService.findById(id);
         if (!companyName.equals("null")) {
             vacancyDto.setCompanyName(companyName);
@@ -52,7 +52,10 @@ public class VacancyController {
             vacancyDto.setPosition(position);
         }
         if (!graphic.equals("null")) {
-            vacancyDto.setGraphic(graphic);
+            vacancyDto.setGraphicWork(graphic);
+        }
+        if (!typeBusy.equals("null")) {
+            vacancyDto.setTypeBusy(typeBusy);
         }
         if (salary != null) {
             vacancyDto.setSalary(salary);

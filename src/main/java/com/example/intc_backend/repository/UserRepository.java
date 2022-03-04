@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findUserByType(String type);
+    User findByPhoneNumber(String type);
 //    List<Location> findAllByOrderByCLocationIdAsc();
 }

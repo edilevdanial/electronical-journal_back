@@ -4,11 +4,13 @@ package com.example.intc_backend.service;
 import com.example.intc_backend.dto.UserDto;
 import com.example.intc_backend.dto.UserSaveRequestDto;
 import com.example.intc_backend.model.User;
+//import org.springframework.security.core.userdetails.UserDetails;
+//import org.springframework.security.core.userdetails.UserDetailsService;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
 
 public interface UserService {
-
     void save(UserSaveRequestDto userSaveRequestDto);
 
     List<UserDto> findAll();
