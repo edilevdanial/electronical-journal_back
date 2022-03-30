@@ -1,9 +1,6 @@
 package com.example.intc_backend.сontroller;
 
-import com.example.intc_backend.dto.CourseDto;
-import com.example.intc_backend.dto.GroupCourseTeacherRelationDto;
-import com.example.intc_backend.dto.GroupCourseTeacherRelationSaveRequestDto;
-import com.example.intc_backend.dto.GroupDto;
+import com.example.intc_backend.dto.*;
 import com.example.intc_backend.model.GroupCourseTeacherRelation;
 import com.example.intc_backend.service.CourseService;
 import com.example.intc_backend.service.GroupCourseTeacherRelationService;
@@ -14,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class GroupCourseTeacherRelationController {
@@ -28,14 +26,15 @@ public class GroupCourseTeacherRelationController {
     }
 
     @PostMapping(value = "/group-course")
-    public ResponseEntity<List<GroupCourseTeacherRelationDto>> findAllCourses(@RequestBody GroupCourseTeacherRelationSaveRequestDto groupCourseTeacherRelationSaveRequestDto){
+    public ResponseEntity<List<GroupCourseTeacherRelationDto>> findAllCourses(@RequestBody GroupCourseTeacherRelationSaveRequestDto groupCourseTeacherRelationSaveRequestDto) {
         System.out.println(groupCourseTeacherRelationSaveRequestDto.getCourseId());
         System.out.println(groupCourseTeacherRelationSaveRequestDto.getGroupId());
         System.out.println(groupCourseTeacherRelationSaveRequestDto.getTeacherId());
         groupCourseTeacherRelationService.save(groupCourseTeacherRelationSaveRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-//
+
+    //
 //    @GetMapping(value = "/all/course")
 //    public ResponseEntity<List<GroupCourseTeacherRelationDto>> findAllCourses(){
 //        List<GroupCourseTeacherRelationDto> groupCourseTeacherRelationDtoList = groupCourseTeacherRelationService.findAll();
@@ -43,18 +42,21 @@ public class GroupCourseTeacherRelationController {
 //        return ResponseEntity.ok(groupCourseTeacherRelationDtoList);
 //    }
     @GetMapping(value = "/group-course/{id}")
-    public ResponseEntity<List<GroupCourseTeacherRelationDto>> findAllCourses(@PathVariable(name = "id")Long groupId){
+    public ResponseEntity<List<GroupCourseTeacherRelationDto>> findAllCourses(@PathVariable(name = "id") Long groupId) {
         List<GroupCourseTeacherRelationDto> groupCourseTeacherRelationDtoList = groupCourseTeacherRelationService.findByGroupId(groupId);
 
 //        for (GroupCourseTeacherRelationDto groupCourseTeacherRelationDto:groupCourseTeacherRelationDtoList){
 //
 //        }
+        System.out.println(groupCourseTeacherRelationDtoList);
+        System.out.println(groupId);
         return ResponseEntity.ok(groupCourseTeacherRelationDtoList);
     }
 
     @GetMapping(value = "/get-all-groups-teacher/{id}")
-    public ResponseEntity<List<GroupDto>> getAllGroupsByTeacherId(@PathVariable(name = "id")Long teacherId){
-        List<GroupDto> groupDtoList = groupCourseTeacherRelationService.findAllGroupByTeacherId(teacherId);
-        return ResponseEntity.ok(groupDtoList);
+    public ResponseEntity<List<GroupCourseTeacherRelationForTeacherDto>> getAllGroupsByTeacherId(@PathVariable(name = "id") Long teacherId) {
+        List<GroupCourseTeacherRelationForTeacherDto> groupCourseTeacherRelationForTeacherDtoList = groupCourseTeacherRelationService.findAllGroupByTeacherId(teacherId);
+        System.out.println(groupCourseTeacherRelationForTeacherDtoList);
+        return ResponseEntity.ok(groupCourseTeacherRelationForTeacherDtoList);
     }
 }

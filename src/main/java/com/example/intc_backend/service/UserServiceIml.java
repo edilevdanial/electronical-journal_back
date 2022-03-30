@@ -28,8 +28,15 @@ public class UserServiceIml implements UserService {
     @Override
     public void save(UserSaveRequestDto userSaveRequestDto) {
         User user = UserUtil.toUser(userSaveRequestDto);
+        String validPhone = user.getPhoneNumber().replaceAll("[\\ \\+\\-\\(\\)]", "");
+        user.setPhoneNumber(validPhone);
         userRepository.save(user);
-//        clientRepository.save(user);
+    }
+
+    @Override
+    public User findByPhoneNumber(String phoneNumber) {
+        User user = userRepository.findByPhoneNumber(phoneNumber);
+        return user;
     }
 
     @Override
@@ -61,11 +68,6 @@ public class UserServiceIml implements UserService {
         return UserUtil.toUserDto(user);
     }
 
-//    @Override
-//    public User find(Long id) {
-//        return clientRepository.getById(id);
-//    }
-
     @Override
     public boolean updatePhoneNumber(Long userId, String phone_number) {
         User user = userRepository.getById(userId);
@@ -80,9 +82,18 @@ public class UserServiceIml implements UserService {
     @Override
     public boolean delete(Long id) {
         if (userRepository.existsById(id)) {
-            userRepository.getById(id).setActive(false);
+            //#TODO исправить тут
+//            userRepository.getById(id).setActive(false);
             return true;
         }
         return false;
     }
+
+    @Override
+    public void updateToken(Long id, String token) {
+        User user = userRepository.getById(id);
+        user.setToken(token);
+        userRepository.save(user);
+    }
+
 }

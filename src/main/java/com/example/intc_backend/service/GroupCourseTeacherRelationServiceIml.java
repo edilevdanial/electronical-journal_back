@@ -1,9 +1,6 @@
 package com.example.intc_backend.service;
 
-import com.example.intc_backend.dto.GroupCourseTeacherRelationDto;
-import com.example.intc_backend.dto.GroupCourseTeacherRelationSaveRequestDto;
-import com.example.intc_backend.dto.GroupDto;
-import com.example.intc_backend.dto.TeacherGroupRelationDto;
+import com.example.intc_backend.dto.*;
 import com.example.intc_backend.model.GroupCourseTeacherRelation;
 import com.example.intc_backend.repository.GroupCourseTeacherRelationRepository;
 import com.example.intc_backend.util.GroupCourseTeacherRelationUtil;
@@ -12,15 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
-public class GroupCourseTeacherRelationServiceIml implements GroupCourseTeacherRelationService{
+public class GroupCourseTeacherRelationServiceIml implements GroupCourseTeacherRelationService {
 
     @Autowired
     private GroupCourseTeacherRelationRepository groupCourseTeacherRelationRepository;
     @Autowired
     private GroupService groupService;
+    @Autowired
+    private CourseService courseService;
 
 
     @Override
@@ -48,13 +49,24 @@ public class GroupCourseTeacherRelationServiceIml implements GroupCourseTeacherR
         groupCourseTeacherRelationDto.setTeacherId(changeNeedTeacherId);
         groupCourseTeacherRelationRepository.save(GroupCourseTeacherRelationUtil.toGroupCourseTeacherRelation(groupCourseTeacherRelationDto));
     }
+
     @Override
-    public List<GroupDto> findAllGroupByTeacherId(Long teacherId){
+    public   List<GroupCourseTeacherRelationForTeacherDto> findAllGroupByTeacherId(Long teacherId) {
         List<GroupCourseTeacherRelationDto> groupCourseTeacherRelationDtoList = GroupCourseTeacherRelationUtil.toGroupCourseTeacherRelationDtoList(groupCourseTeacherRelationRepository.getGroupCourseTeacherRelationByTeacherId(teacherId));
-        List<GroupDto> groupDtoList = new ArrayList<>();
-        for(GroupCourseTeacherRelationDto groupCourseTeacherRelationDto: groupCourseTeacherRelationDtoList){
-            groupDtoList.add(groupService.findById(groupCourseTeacherRelationDto.getGroupId()));
+        Map<Long, List<CourseDto>> groupCourseTeacherRelationForTeacherDto = new HashMap<>();
+        for (GroupCourseTeacherRelationDto groupCourseTeacherRelationDto : groupCourseTeacherRelationDtoList) {
+                if (!groupCourseTeacherRelationForTeacherDto.containsKey(groupService.findById(groupCourseTeacherRelationDto.getGroupId()).getId())) {
+                    groupCourseTeacherRelationForTeacherDto.put(groupService.findById(groupCourseTeacherRelationDto.getGroupId()).getId(), new ArrayList<CourseDto>());
+                }
+            groupCourseTeacherRelationForTeacherDto.get(groupService.findById(groupCourseTeacherRelationDto.getGroupId()).getId()).add(courseService.findById(groupCourseTeacherRelationDto.getCourseId()));
         }
-        return groupDtoList;
+        List<GroupCourseTeacherRelationForTeacherDto> groupCourseTeacherRelationForTeacherDtoList = new ArrayList<>();
+        for (Map.Entry<Long, List<CourseDto>> item : groupCourseTeacherRelationForTeacherDto.entrySet()){
+            GroupCourseTeacherRelationForTeacherDto teacherDto = new GroupCourseTeacherRelationForTeacherDto();
+            teacherDto.setCourse(item.getValue());
+            teacherDto.setGroup(groupService.findById(item.getKey()));
+            groupCourseTeacherRelationForTeacherDtoList.add(teacherDto);
+        }
+        return groupCourseTeacherRelationForTeacherDtoList;
     }
 }

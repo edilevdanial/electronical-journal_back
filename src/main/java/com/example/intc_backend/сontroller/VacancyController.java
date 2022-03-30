@@ -1,11 +1,7 @@
 package com.example.intc_backend.сontroller;
 
-import com.example.intc_backend.dto.NewsDto;
-import com.example.intc_backend.dto.NewsSaveRequestDto;
 import com.example.intc_backend.dto.VacancyDto;
 import com.example.intc_backend.dto.VacancySaveRequestDto;
-import com.example.intc_backend.model.Vacancy;
-import com.example.intc_backend.service.NewsService;
 import com.example.intc_backend.service.VacancyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,6 +74,4 @@ public class VacancyController {
 
         return ResponseEntity.ok(userDtoList);
     }
-
-
 }

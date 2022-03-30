@@ -19,7 +19,8 @@ public class CourseServiceIml implements CourseService{
     @Override
     public List<CourseDto> findAll() {
         List<CourseDto> courseDtoList = CourseUtil.toCourseDtoList(courseRepository.findAll());
-
+        CourseDto courseDto = new CourseDto();
+        Object obj = new Object();
         return courseDtoList;
     }
 

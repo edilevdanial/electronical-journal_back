@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS lesson
     id          BIGSERIAL    NOT NULL PRIMARY KEY,
     course_id   BIGSERIAL    NOT NULL,
     FOREIGN KEY (course_id) REFERENCES course (id),
+    group_id   BIGSERIAL    NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES group_ (id),
     name        VARCHAR(200) NOT NULL,
     link        TEXT         NOT NULL,
     description TEXT         NOT NULL
@@ -44,6 +46,10 @@ CREATE TABLE IF NOT EXISTS homework
     FOREIGN KEY (lesson_id) REFERENCES lesson (id),
     teacher_id  BIGSERIAL             NOT NULL,
     FOREIGN KEY (teacher_id) REFERENCES person (id),
+    course_id  BIGSERIAL             NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES course(id),
+    group_id  BIGSERIAL             NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES group_(id),
     name        VARCHAR(200)          NOT NULL,
     type        VARCHAR(5)            NOT NULL,
     description TEXT
@@ -159,5 +165,11 @@ CREATE TABLE IF NOT EXISTS group_course_teacher_relation
     course_id BIGSERIAL NOT NULL,
     FOREIGN KEY (course_id) REFERENCES course(id)
 );
+
+CREATE TABLE IF NOT EXISTS roles
+(
+    id BIGINT not null PRIMARY KEY,
+    name varchar(50) NOT NULL
+)
 -- DROP TABLE group_list
 -- CREATE SEQUENCE clients_id_seq START WITH 3 INCREMENT 1;

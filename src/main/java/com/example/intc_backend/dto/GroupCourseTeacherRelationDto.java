@@ -1,5 +1,6 @@
 package com.example.intc_backend.dto;
 
+
 public class GroupCourseTeacherRelationDto {
     private Long groupId;
     private Long courseId;

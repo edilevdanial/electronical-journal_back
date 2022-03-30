@@ -1,11 +1,10 @@
 package com.example.intc_backend.service;
 
-import com.example.intc_backend.dto.GroupCourseTeacherRelationDto;
-import com.example.intc_backend.dto.GroupCourseTeacherRelationSaveRequestDto;
-import com.example.intc_backend.dto.GroupDto;
+import com.example.intc_backend.dto.*;
 import com.example.intc_backend.model.GroupCourseTeacherRelation;
 
 import java.util.List;
+import java.util.Map;
 
 public interface GroupCourseTeacherRelationService {
 
@@ -13,7 +12,7 @@ public interface GroupCourseTeacherRelationService {
 
     List<GroupCourseTeacherRelationDto> findByGroupId(Long groupId);
 
-    List<GroupDto> findAllGroupByTeacherId(Long teacherId);
+    List<GroupCourseTeacherRelationForTeacherDto> findAllGroupByTeacherId(Long teacherId);
 
     void changeTeacherIdInCourse(GroupCourseTeacherRelationDto groupCourseTeacherRelationDto, Long changeNeedTeacherId);
 
