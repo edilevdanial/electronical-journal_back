@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS curator_group_relation
     teacher_id BIGSERIAL NOT NULL,
     FOREIGN KEY (teacher_id) REFERENCES person (id),
     group_id   BIGSERIAL NOT NULL,
-    FOREIGN KEY (group_id) REFERENCES group_ (id),
+    FOREIGN KEY (group_id) REFERENCES group_ (id)
 );
 
 CREATE TABLE IF NOT EXISTS group_course_teacher_relation
