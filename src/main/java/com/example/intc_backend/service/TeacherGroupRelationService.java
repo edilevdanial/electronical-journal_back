@@ -11,6 +11,6 @@ public interface TeacherGroupRelationService {
 
     List<TeacherGroupRelationDto> findAll();
 
-    Boolean find(Long teacherId);
+    CuratorGroup find(Long teacherId);
 
 }

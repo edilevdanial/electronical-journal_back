@@ -6,8 +6,12 @@ import com.example.intc_backend.model.User;
 import com.example.intc_backend.repository.UserRepository;
 import com.example.intc_backend.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,15 +23,14 @@ public class UserServiceIml implements UserService {
 
     @Override
     public List<UserDto> findUserByType(String type) {
-        System.out.println(type);
         List<UserDto> findUser = UserUtil.toListUserDto(userRepository.findUserByType(type));
-        System.out.println(Arrays.asList(findUser) + "HELLO");
         return findUser;
     }
 
     @Override
     public void save(UserSaveRequestDto userSaveRequestDto) {
         User user = UserUtil.toUser(userSaveRequestDto);
+
         String validPhone = user.getPhoneNumber().replaceAll("[\\ \\+\\-\\(\\)]", "");
         user.setPhoneNumber(validPhone);
         userRepository.save(user);
@@ -41,6 +44,12 @@ public class UserServiceIml implements UserService {
 
     @Override
     public List<UserDto> findAll() {
+//        int page = 0;
+//        int size = 3;
+//        Pageable paging = (Pageable) PageRequest.of(page, size);
+//        System.out.println(userRepository.findAll(paging));
+////        return userRepository.findAll(paging);
+        //#TODO добавить пагинацию и сортировку
         return UserUtil.toListUserDto(userRepository.findAll());
     }
 
@@ -96,4 +105,9 @@ public class UserServiceIml implements UserService {
         userRepository.save(user);
     }
 
+    @Override
+    public List<UserDto> findAll(int page, int size) {
+        List<UserDto> userDtoList = UserUtil.toListUserDto(userRepository.findAll(PageRequest.of(page,size)).getContent());
+        return userDtoList;
+    }
 }

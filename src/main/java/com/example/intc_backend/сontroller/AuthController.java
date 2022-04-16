@@ -60,9 +60,4 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
-
-//    @PostMapping(path = "/register", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public @ResponseBody String x(@RequestBody Map<String, String> body) {
-//
-//    }
 }

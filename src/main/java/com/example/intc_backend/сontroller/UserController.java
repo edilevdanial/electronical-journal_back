@@ -6,6 +6,8 @@ import com.example.intc_backend.dto.UserSaveRequestDto;
 import com.example.intc_backend.service.UserService;
 import com.example.intc_backend.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,22 +36,22 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/users/{id}")
-    public ResponseEntity<UserDto> read(@PathVariable(name = "id") Long id) {
+    @GetMapping(value = "/user/{id}")
+    public ResponseEntity<UserDto> readById(@PathVariable(name = "id") Long id) {
         UserDto user = userService.find(id);
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping(value = "/users")
-    public ResponseEntity<UserDto> read(@RequestParam(name = "phone") String phone) {
-
+    @GetMapping(value = "/user")
+    public ResponseEntity<UserDto> readByPhoneName(@RequestParam(name = "phone") String phone) {
         UserDto user = UserUtil.toUserDto(userService.findByPhoneNumber(phone));
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping(value = "/all/user")
+    @GetMapping(value = "/users")
     public ResponseEntity<List<UserDto>> read() {
-        List<UserDto> userDtos = userService.findAll();
+
+        List<UserDto> userDtos = userService.findAll(0,10);
 
         return userDtos != null && !userDtos.isEmpty()
                 ? new ResponseEntity<>(userDtos, HttpStatus.OK)
@@ -57,12 +59,12 @@ public class UserController {
     }
 
 
-    @PostMapping(value = "/all/sort/user/{type}")
-    public ResponseEntity<List<UserDto>> getAllStudent(@PathVariable(name = "type") String type) {
-        List<UserDto> userDtos = userService.getAllStudent(type);
+    @GetMapping(value = "/userByType")
+    public ResponseEntity<List<UserDto>> getAllUserByType(@RequestParam(name = "type") String type) {
+        List<UserDto> userDtoList = userService.findUserByType(type);
 
-        return userDtos != null && !userDtos.isEmpty()
-                ? new ResponseEntity<>(userDtos, HttpStatus.OK)
+        return userDtoList != null && !userDtoList.isEmpty()
+                ? new ResponseEntity<>(userDtoList, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

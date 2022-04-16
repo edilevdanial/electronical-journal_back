@@ -63,7 +63,7 @@ public class CourseController {
     }
 
     @GetMapping(value = "/course/all")
-    public ResponseEntity<List<CourseFullDataDto>> getFullObject() {
+    public ResponseEntity<List<CourseFullDataDto>> getFullСourse() {
         List<CourseTeacherRelationDto> courseTeacherRelationDtoList = courseTeacherRelationService.findAll();
         List<CourseDto> courseDtoList = courseService.findAll();
         List<CourseFullDataDto> courseFullDataDto = CourseFullDataUtil.toCourseFullDataUtilList(courseDtoList, courseTeacherRelationDtoList);
@@ -84,7 +84,6 @@ public class CourseController {
         }
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
-
 
     public void saveToCourseTeacherRelation(Long teacherId, Long courseId) {
         CourseTeacherRelationSaveDto courseTeacherRelationSaveDto = new CourseTeacherRelationSaveDto();

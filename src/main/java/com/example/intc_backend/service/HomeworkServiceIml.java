@@ -30,8 +30,9 @@ public class HomeworkServiceIml implements HomeworkService {
     }
 
     @Override
-    public void saveHomework(HomeworkSaveRequestDto homeworkSaveRequestDto) {
+    public HomeworkDto saveHomework(HomeworkSaveRequestDto homeworkSaveRequestDto) {
         LessonDto lessonDto = lessonService.getLessonById(homeworkSaveRequestDto.getLessonId());
-        homeworkRepository.save(HomeworkUtil.toHomework(homeworkSaveRequestDto, lessonDto.getCourseId(), lessonDto.getGroupId()));
+       HomeworkDto homeworkDto =  HomeworkUtil.toHomeWorkDto(homeworkRepository.save(HomeworkUtil.toHomework(homeworkSaveRequestDto, lessonDto.getCourseId(), lessonDto.getGroupId())));
+       return homeworkDto;
     }
 }

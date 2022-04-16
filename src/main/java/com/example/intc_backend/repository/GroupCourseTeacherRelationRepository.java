@@ -10,5 +10,5 @@ import java.util.List;
 public interface GroupCourseTeacherRelationRepository extends JpaRepository<GroupCourseTeacherRelation,Long> {
     List<GroupCourseTeacherRelation> getGroupCourseTeacherRelationByGroupId(Long groupId);
     List<GroupCourseTeacherRelation> getGroupCourseTeacherRelationByTeacherId(Long teacherId);
-
+//    List<GroupCourseTeacherRelation> findAllByCourseIdNotInAndGroupId(Long groupId);
 }

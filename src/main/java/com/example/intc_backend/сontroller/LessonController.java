@@ -20,20 +20,20 @@ public class LessonController {
         this.lessonService = lessonService;
     }
 
-    @PostMapping(value = "/create/lesson")
+    @PostMapping(value = "/lesson")
     public ResponseEntity<HttpStatus> createLesson(@RequestBody LessonSaveRequestDto lessonSaveRequestDto) {
         lessonService.saveLesson(lessonSaveRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping(value = "/get/lessons")
+    @GetMapping(value = "/lessons")
     public ResponseEntity<List<LessonDto>> getAllLessonsByCourseIdAndGroupId(@RequestParam(name = "groupId") Long groupId, @RequestParam(name = "courseId") Long courseId) {
         List<LessonDto> lessonDtoList = lessonService.allLessonByGroupId(groupId, courseId);
 
         return ResponseEntity.ok(lessonDtoList);
     }
 
-    @GetMapping(value = "/get/lesson/{id}")
+    @GetMapping(value = "/lesson/{id}")
     public ResponseEntity<LessonDto> getLesson(@PathVariable(name = "id") Long lessonId) {
         LessonDto lessonDto = lessonService.getLessonById(lessonId);
         return ResponseEntity.ok(lessonDto);

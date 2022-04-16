@@ -10,5 +10,5 @@ public interface HomeworkService {
 
     HomeworkDto findHomework(Long homeworkId);
 
-    void saveHomework(HomeworkSaveRequestDto homeworkSaveRequestDto);
+    HomeworkDto saveHomework(HomeworkSaveRequestDto homeworkSaveRequestDto);
 }

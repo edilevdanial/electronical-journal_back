@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface TeacherGroupRelationRepository extends JpaRepository<TeacherGroupRelation, Long> {
 //    Boolean findByTeacherId(Long teacherId);
-    List<TeacherGroupRelation> findAllByTeacherId(Long teacherId);
+    TeacherGroupRelation findByTeacherId(Long teacherId);
 }

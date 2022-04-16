@@ -17,4 +17,8 @@ public interface GroupCourseTeacherRelationService {
     void changeTeacherIdInCourse(GroupCourseTeacherRelationDto groupCourseTeacherRelationDto, Long changeNeedTeacherId);
 
     List<GroupCourseTeacherRelationDto> findAll();
+
+    List<CourseDto> getAllCourseByTeacherId(Long teacherId);
+
+    List<GroupCourseTeacherRelationDto> findFreeCourse(Long groupId);
 }

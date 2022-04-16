@@ -29,4 +29,6 @@ public interface UserService {
     boolean updatePhoneNumber(Long userId, String phone_number);
 
     boolean delete(Long id);
+
+    List<UserDto> findAll(int page,int size);
 }
