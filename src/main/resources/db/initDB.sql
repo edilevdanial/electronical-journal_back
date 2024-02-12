@@ -18,6 +18,14 @@ CREATE TABLE IF NOT EXISTS course
     name VARCHAR(200) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS group_
+(
+    id         BIGSERIAL    NOT NULL PRIMARY KEY,
+    name       VARCHAR(200) NOT NULL,
+    teacher_id BIGSERIAL    NOT NULL,
+    FOREIGN KEY (teacher_id) REFERENCES person (id)
+);
+
 CREATE TABLE IF NOT EXISTS lesson
 (
     id          BIGSERIAL    NOT NULL PRIMARY KEY,
@@ -30,14 +38,6 @@ CREATE TABLE IF NOT EXISTS lesson
     description TEXT         NOT NULL
 );
 
-
-CREATE TABLE IF NOT EXISTS group_
-(
-    id         BIGSERIAL    NOT NULL PRIMARY KEY,
-    name       VARCHAR(200) NOT NULL,
-    teacher_id BIGSERIAL    NOT NULL,
-    FOREIGN KEY (teacher_id) REFERENCES person (id)
-);
 
 CREATE TABLE IF NOT EXISTS homework
 (

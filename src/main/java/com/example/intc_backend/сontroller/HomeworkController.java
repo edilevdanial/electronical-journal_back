@@ -27,16 +27,16 @@ public class HomeworkController {
     @PostMapping(value = "/homework")
     private ResponseEntity<?> saveHomework(@RequestBody FullHomeWorkDto fullHomeWork) {
         HomeworkDto homeworkDto = homeworkService.saveHomework(fullHomeWork.getHomework());
-        if(fullHomeWork.getHomework().getType().equals("f")){
+        if (fullHomeWork.getHomework().getType().equals("f")) {
             HomeworkMaterialSaveRequestDto homeworkMaterialSaveRequestDto = new HomeworkMaterialSaveRequestDto();
             homeworkMaterialSaveRequestDto.setHomeworkId(homeworkDto.getId());
             homeworkMaterialSaveRequestDto.setLink(fullHomeWork.getMaterial());
             homeworkMaterialService.save(homeworkMaterialSaveRequestDto);
-        }else{
-            if(fullHomeWork.getHomework().getType().equals("t")){
+        } else {
+            if (fullHomeWork.getHomework().getType().equals("t")) {
                 Gson g = new Gson();
                 Test test = new Test();
-                test.setTestId((long)1);
+                test.setTestId((long) 1);
                 test.setCorrectMessage("hello");
                 test.setName("hello");
                 List<String> answers = new ArrayList<>();
@@ -52,7 +52,7 @@ public class HomeworkController {
 //                g.fromJson("text",Test.class);
 //                Test test2 = g.fromJson(fullHomeWork.getMaterial(), Test.class);
                 HomeworkTest homeworkTest = new HomeworkTest();
-                homeworkTest.setProblems(g.toJson(test));
+                homeworkTest.setProblems(fullHomeWork.getMaterial());
                 homeworkTest.setHomeworkId(homeworkDto.getId());
                 homeworkTest.setName("HELLO");
                 homeworkTestRepository.save(homeworkTest);
@@ -70,6 +70,12 @@ public class HomeworkController {
     @GetMapping(value = "/get/homework/{id}")
     private ResponseEntity<HomeworkDto> findHomework(@PathVariable(name = "id") Long homeworkId) {
         HomeworkDto homeworkDto = homeworkService.findHomework(homeworkId);
+        return ResponseEntity.ok(homeworkDto);
+    }
+
+    @GetMapping(value = "/homework")
+    private ResponseEntity<List<HomeworkDto>> findHomeworkByLessonId(@RequestParam(name = "lessonId") Long lessonId) {
+        List<HomeworkDto> homeworkDto = homeworkService.findHomeworkByLessonId(lessonId);
         return ResponseEntity.ok(homeworkDto);
     }
 }

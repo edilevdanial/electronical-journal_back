@@ -52,4 +52,10 @@ public class SeminarServiceIml implements SeminarService{
             seminarRepository.save(SeminarUtil.toSeminar(saveRequestDto));
         }
     }
+
+    @Override
+    public List<SeminarDto> findByTeacherId(Long teacherId) {
+        List<SeminarDto> seminarDtoListByGroup = SeminarUtil.toSeminarDtoList(seminarRepository.findByTeacherId(teacherId),courseService);
+        return seminarDtoListByGroup;
+    }
 }

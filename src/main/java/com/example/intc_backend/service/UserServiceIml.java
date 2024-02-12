@@ -1,5 +1,6 @@
 package com.example.intc_backend.service;
 
+import com.example.intc_backend.dto.StudentFullDto;
 import com.example.intc_backend.dto.UserDto;
 import com.example.intc_backend.dto.UserSaveRequestDto;
 import com.example.intc_backend.model.User;
@@ -32,8 +33,15 @@ public class UserServiceIml implements UserService {
         User user = UserUtil.toUser(userSaveRequestDto);
 
         String validPhone = user.getPhoneNumber().replaceAll("[\\ \\+\\-\\(\\)]", "");
+
         user.setPhoneNumber(validPhone);
         userRepository.save(user);
+    }
+
+    @Override
+    public UserDto findUserByToken(String token) {
+        UserDto userDto = UserUtil.toUserDto(userRepository.findByToken(token));
+        return userDto;
     }
 
     @Override
@@ -107,7 +115,12 @@ public class UserServiceIml implements UserService {
 
     @Override
     public List<UserDto> findAll(int page, int size) {
-        List<UserDto> userDtoList = UserUtil.toListUserDto(userRepository.findAll(PageRequest.of(page,size)).getContent());
+        List<UserDto> userDtoList = UserUtil.toListUserDto(userRepository.findAll(PageRequest.of(page, size)).getContent());
         return userDtoList;
     }
+
+//    @Override
+//    public StudentFullDto studentFullData(Long id) {
+//
+//    }
 }

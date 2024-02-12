@@ -31,7 +31,9 @@ public class UserController {
     @PostMapping(value = "/user")
     public ResponseEntity<?> create(@RequestBody UserSaveRequestDto userSaveRequestDto) {
         String encodedPassword = this.passwordEncoder.encode(userSaveRequestDto.getPassword());
+        System.out.println("YEP BRO HERE ");
         userSaveRequestDto.setPassword(encodedPassword);
+        System.out.println(userSaveRequestDto.toString());
         userService.save(userSaveRequestDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
@@ -51,10 +53,20 @@ public class UserController {
     @GetMapping(value = "/users")
     public ResponseEntity<List<UserDto>> read() {
 
-        List<UserDto> userDtos = userService.findAll(0,10);
+        List<UserDto> userDtos = userService.findAll(0, 10);
 
         return userDtos != null && !userDtos.isEmpty()
                 ? new ResponseEntity<>(userDtos, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping(value = "/user/me")
+    public ResponseEntity<UserDto> findByToken(@RequestHeader(name = "Authorization") String token) {
+        System.out.println("TOKENNN" + token.split(" ")[1]);
+        UserDto userDto = userService.findUserByToken(token.split(" ")[1]);
+
+        return userDto != null
+                ? new ResponseEntity<>(userDto, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 

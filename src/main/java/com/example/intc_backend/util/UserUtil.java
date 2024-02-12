@@ -1,5 +1,6 @@
 package com.example.intc_backend.util;
 
+import com.example.intc_backend.dto.StudentFullDto;
 import com.example.intc_backend.model.User;
 import com.example.intc_backend.dto.UserDto;
 import com.example.intc_backend.dto.UserSaveRequestDto;
@@ -58,5 +59,7 @@ public class UserUtil {
         user.setToken("fsfdasdasdasdsadas");
         return user;
     }
+
+//    public static StudentFullDto toStudentFullDto()
 
 }

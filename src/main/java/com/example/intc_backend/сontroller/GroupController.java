@@ -71,6 +71,16 @@ public class GroupController {
         return ResponseEntity.ok(userDtoList);
     }
 
+    @GetMapping(value = "/group/student")
+    public ResponseEntity<List<UserDto>> findStudentOfGroup(@RequestParam(name = "groupId") Long groupId) {
+        List<StudentGroupRelationDto> studentId = studentGroupClient.findStudentIdByGroupId(groupId);
+        List<UserDto> userDtoList = new ArrayList<>();
+        for (StudentGroupRelationDto student : studentId) {
+            userDtoList.add(userService.find(student.getStudentId()));
+        }
+        return ResponseEntity.ok(userDtoList);
+    }
+
     @GetMapping(value = "/all/group")
     public ResponseEntity<List<GroupDto>> findAllGroup() {
         List<GroupDto> groupDtoList = groupService.findAll();

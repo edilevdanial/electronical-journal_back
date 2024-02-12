@@ -14,6 +14,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findUserByType(String type);
 //    @Query("select a from User a")
     User findByPhoneNumber(String type);
+    User findByToken(String token);
 //    List<User> findAll(Pageable pageable)
 //    List<Location> findAllByOrderByCLocationIdAsc();
 }

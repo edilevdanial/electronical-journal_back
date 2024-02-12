@@ -16,6 +16,7 @@ public interface SeminarService {
     void updateSeminar(SeminarDto seminarDto);
 
     List<SeminarDto> findByGroupId(Long groupId);
+    List<SeminarDto> findByTeacherId(Long teacherId);
 
     void saveArray(SeminarSaveRequestDto[] seminarSaveRequestDto);
 

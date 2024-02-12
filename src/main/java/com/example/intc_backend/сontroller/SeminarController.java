@@ -23,7 +23,6 @@ public class SeminarController {
     @PostMapping(value = "create-seminar")
     public ResponseEntity<?> createSeminar(@RequestBody SeminarSaveRequestDto[] seminarSaveRequestDto) {
         seminarService.saveArray(seminarSaveRequestDto);
-
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 //
@@ -51,6 +50,12 @@ public class SeminarController {
     @GetMapping(value = "seminar/group")
     public ResponseEntity<List<SeminarDto>> allSeminarByGroupId(@RequestParam(name = "groupId") Long groupId) {
         List<SeminarDto> seminarDtoListByGroup = seminarService.findByGroupId(groupId);
+
+        return ResponseEntity.ok(seminarDtoListByGroup);
+    }
+    @GetMapping(value = "seminar/teacher")
+    public ResponseEntity<List<SeminarDto>> allSeminarForTeacher(@RequestParam(name = "teacherId") Long teacherId) {
+        List<SeminarDto> seminarDtoListByGroup = seminarService.findByTeacherId(teacherId);
 
         return ResponseEntity.ok(seminarDtoListByGroup);
     }

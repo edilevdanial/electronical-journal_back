@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface SubmissionRepository extends JpaRepository<Submission, Long> {
     List<Submission> findAllByHomeworkId(Long homeworkId);
-    Submission findByHomeworkId(Long homeworkId);
+    List<Submission> findByHomeworkId(Long homeworkId);
 }

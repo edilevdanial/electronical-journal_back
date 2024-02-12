@@ -11,4 +11,8 @@ public interface HomeworkService {
     HomeworkDto findHomework(Long homeworkId);
 
     HomeworkDto saveHomework(HomeworkSaveRequestDto homeworkSaveRequestDto);
+
+    List<HomeworkDto> findHomeworkByTeacherId(Long teacherId);
+
+    List<HomeworkDto> findHomeworkByLessonId(Long lessonId);
 }

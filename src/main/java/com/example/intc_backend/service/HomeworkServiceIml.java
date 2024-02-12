@@ -35,4 +35,16 @@ public class HomeworkServiceIml implements HomeworkService {
        HomeworkDto homeworkDto =  HomeworkUtil.toHomeWorkDto(homeworkRepository.save(HomeworkUtil.toHomework(homeworkSaveRequestDto, lessonDto.getCourseId(), lessonDto.getGroupId())));
        return homeworkDto;
     }
+
+    @Override
+    public List<HomeworkDto> findHomeworkByTeacherId(Long teacherId) {
+        List<HomeworkDto> homeworkDtoList = HomeworkUtil.toHomeWorkDtoList(homeworkRepository.findAllByTeacherId(teacherId));
+        return homeworkDtoList;
+    }
+
+    @Override
+    public List<HomeworkDto> findHomeworkByLessonId(Long lessonId) {
+        List<HomeworkDto> homeworkDtoList = HomeworkUtil.toHomeWorkDtoList(homeworkRepository.findAllByLessonId(lessonId));
+        return homeworkDtoList;
+    }
 }

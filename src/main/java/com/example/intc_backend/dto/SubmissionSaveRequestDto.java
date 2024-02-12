@@ -5,6 +5,15 @@ import javax.persistence.Column;
 public class SubmissionSaveRequestDto {
     private Long studentId;
     private Long homeworkId;
+    public Long gradeId;
+
+    public Long getGradeId() {
+        return gradeId;
+    }
+
+    public void setGradeId(Long gradeId) {
+        this.gradeId = gradeId;
+    }
 
     public Long getStudentId() {
         return studentId;

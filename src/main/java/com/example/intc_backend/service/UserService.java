@@ -2,6 +2,7 @@ package com.example.intc_backend.service;
 
 //import com.example.intc_backend.Model.UserModel.UserSaveRequestDto userSaveRequestDto;
 
+import com.example.intc_backend.dto.StudentFullDto;
 import com.example.intc_backend.dto.UserDto;
 import com.example.intc_backend.dto.UserSaveRequestDto;
 import com.example.intc_backend.model.User;
@@ -18,7 +19,7 @@ public interface UserService {
 
     UserDto find(Long id);
 
-    void updateToken(Long id,String token);
+    void updateToken(Long id, String token);
 
     User findByPhoneNumber(String phoneNumber);
 
@@ -26,9 +27,13 @@ public interface UserService {
 
     List<UserDto> findUserByType(String type);
 
+    UserDto findUserByToken(String token);
+
     boolean updatePhoneNumber(Long userId, String phone_number);
 
     boolean delete(Long id);
 
-    List<UserDto> findAll(int page,int size);
+    List<UserDto> findAll(int page, int size);
+
+//    StudentFullDto studentFullData(Long id);
 }

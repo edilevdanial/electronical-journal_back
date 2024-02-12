@@ -28,6 +28,11 @@ logging:
 jwt:
   secret: mySecr3t!
 
+
+swagger:
+  host:
+    url: http://localhost:8082
+
 #  spring.datasource.url=jdbc:postgresql://localhost:5432/intc
 #  spring.datasource.username=danialedilev
 #  spring.datasource.password=123

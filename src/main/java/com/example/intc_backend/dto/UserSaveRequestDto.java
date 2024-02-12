@@ -1,6 +1,5 @@
 package com.example.intc_backend.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserSaveRequestDto {
     private String firstName;
@@ -10,7 +9,6 @@ public class UserSaveRequestDto {
     private String email;
     private String password;
     private String type;
-
 
     public String getLastName() {
         return lastName;
@@ -66,5 +64,18 @@ public class UserSaveRequestDto {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+
+    @Override
+    public String toString() {
+        return "UserSaveRequestDto{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", patronymicName='" + patronymicName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

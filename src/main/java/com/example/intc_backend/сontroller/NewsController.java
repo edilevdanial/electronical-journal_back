@@ -52,7 +52,7 @@ public class NewsController {
         return ResponseEntity.ok(newsDto);
     }
 
-    @GetMapping(value = "/all/news")
+    @GetMapping(value = "/news")
     public ResponseEntity<List<NewsDto>> findAllNewsList(){
         List<NewsDto> userDtoList = newsService.findAll();
 

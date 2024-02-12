@@ -10,9 +10,9 @@ import com.example.intc_backend.service.SubmissionTestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class SubmissionController {
@@ -44,4 +44,19 @@ public class SubmissionController {
         }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PostMapping(value = "/submission/grade")
+    private ResponseEntity<?> setGradeToHomework(@RequestParam(name = "submissionId") Long submissionId, @RequestParam(name = "grade") Long gradeId) {
+        SubmissionDto submissionDto = submissionService.findById(submissionId);
+        submissionDto.setGradeId(gradeId);
+        submissionService.saveEntry(submissionDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/submissions")
+    private ResponseEntity<List<SubmissionSendFullDto>> getSubmissionByPage(@RequestParam(name = "teacherId")Long teacherId) {
+        List<SubmissionSendFullDto> submissionSendFullDtoList = submissionService.findAllByItem(teacherId);
+        return ResponseEntity.ok(submissionSendFullDtoList);
+    }
+
 }

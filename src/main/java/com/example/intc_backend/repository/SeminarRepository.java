@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface SeminarRepository extends JpaRepository<Seminar,Long> {
     List<Seminar> findByGroupId(Long id);
+    List<Seminar> findByTeacherId(Long teacherId);
 }

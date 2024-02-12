@@ -1,8 +1,8 @@
 package com.example.intc_backend.util;
 
-import com.example.intc_backend.dto.SubmissionDto;
-import com.example.intc_backend.dto.SubmissionSaveRequestDto;
+import com.example.intc_backend.dto.*;
 import com.example.intc_backend.model.Submission;
+import com.example.intc_backend.service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +14,14 @@ public class SubmissionUtil {
         submission.setStudentId(submissionSaveRequestDto.getStudentId());
 //        submission.setGradeId(submissionSaveRequestDto.getGradeId());
         submission.setHomeworkId(submissionSaveRequestDto.getHomeworkId());
+        return submission;
+    }
+    public static Submission toSubmission(SubmissionDto submissionDto) {
+        Submission submission = new Submission();
+        submission.setHomeworkId(submissionDto.getHomeworkId());
+        submission.setId(submissionDto.getId());
+        submission.setGradeId(submissionDto.getId());
+        submission.setStudentId(submissionDto.getStudentId());
         return submission;
     }
 
@@ -32,5 +40,18 @@ public class SubmissionUtil {
             submissionDtoList.add(toSubmissionDto(submission));
         }
         return submissionDtoList;
+    }
+    public static List<SubmissionSendFullDto> toSubmissionSendFullDto(List<SubmissionDto> submissions, UserService userService, HomeworkDto homeworkDto) {
+        List<SubmissionSendFullDto> submissionSendFullDtoList = new ArrayList<>();
+        for(SubmissionDto submissionDto: submissions){
+            SubmissionSendFullDto submissionSendFullDto = new SubmissionSendFullDto();
+            submissionSendFullDto.setId(submissionDto.getId());
+            submissionSendFullDto.setHomework(homeworkDto);
+            submissionSendFullDto.setStudent(userService.find(submissionDto.getStudentId()));
+            submissionSendFullDto.setGradeId(submissionDto.getGradeId());
+            submissionSendFullDto.setLink(submissionDto.getLink());
+            submissionSendFullDtoList.add(submissionSendFullDto);
+        }
+        return submissionSendFullDtoList;
     }
 }

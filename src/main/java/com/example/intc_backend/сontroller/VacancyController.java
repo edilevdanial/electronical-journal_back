@@ -68,7 +68,7 @@ public class VacancyController {
         return ResponseEntity.ok(vacancyDto);
     }
 
-    @GetMapping(value = "/all/vacancy")
+    @GetMapping(value = "/vacancies")
     public ResponseEntity<List<VacancyDto>> findAllVacancyList() {
         List<VacancyDto> userDtoList = vacancyService.findAll();
 
